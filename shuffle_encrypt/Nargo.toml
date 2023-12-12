@@ -1,0 +1,8 @@
+[package]
+name = "noir_shuffle"
+type = "bin"
+authors = [""]
+compiler_version = ">=0.19.4"
+
+[dependencies]
+remask = { path = "../remask" }
