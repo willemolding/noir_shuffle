@@ -8,14 +8,14 @@ global N: Field = 6;
 
 pub fn main(
     apk: pub Gaffine,
-    preshuffle: pub [(Gaffine,Gaffine); N],
-    postshuffle: pub [(Gaffine,Gaffine); N],
+    preshuffle: pub [(Gaffine, Gaffine); N],
+    postshuffle: pub [(Gaffine, Gaffine); N],
     shuffle: [Field; N],
-    rand: [Field; N],
+    rand: [Field; N]
 ) {
     assert_valid_permutation(shuffle);
     assert(is_valid_subgroup(apk));
-    
+
     for i in 0..N {
         let result = exp_elgamal_remask(apk, preshuffle[shuffle[i]], rand[i]);
         assert_points_equal(result.0, postshuffle[i].0);
