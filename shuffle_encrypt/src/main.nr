@@ -1,12 +1,12 @@
 use dep::std::ec::tecurve::affine::Curve as AffineCurve;
 use dep::std::ec::tecurve::affine::Point as Gaffine;
 
-use dep::remask::exp_elgamal_remask;
+use dep::remask::{exp_elgamal_remask, is_valid_subgroup};
 
 // number of cards in a deck
 global N: Field = 6;
 
-fn main(
+pub fn main(
     apk: pub Gaffine,
     preshuffle: pub [(Gaffine,Gaffine); N],
     postshuffle: pub [(Gaffine,Gaffine); N],
@@ -14,6 +14,8 @@ fn main(
     rand: [Field; N],
 ) {
     assert_valid_permutation(shuffle);
+    assert(is_valid_subgroup(apk));
+    
     for i in 0..N {
         let result = exp_elgamal_remask(apk, preshuffle[shuffle[i]], rand[i]);
         assert_points_equal(result.0, postshuffle[i].0);
